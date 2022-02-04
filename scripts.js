@@ -22,19 +22,23 @@ function validateQtCards(qtCards){
     if ((qtCards < 4) || (qtCards > 14) || (qtCards % 2 !== 0)) {
         return false;
     }else{
-        toDealCards();
+        toDealCards(qtCards);
         return true;
     }
 }
 
 /*====FUNÇÃO DE ESPALHAR CARTAS===*/
-function toDealCards(){
+function toDealCards(qtCards){
     let teste = document.querySelector('main');
-    deckOfCards.sort(shuffleCards);
-    for (let i = 0; i < deckOfCards.length; i++) {
+
+    let newDeck = newDeckOfCards(qtCards);
+    newDeck.sort(shuffleCards);
+
+    //console.log(newDeck);
+    for (let i = 0; i < newDeck.length; i++) {
         teste.innerHTML =  teste.innerHTML +    `<div class="card" data-identifier="card">
                                                     <div class="face back-face" data-identifier="back-face">
-                                                        <img src="./assets/${deckOfCards[i]}.gif" alt="">
+                                                        <img src="./assets/${newDeck[i]}.gif" alt="">
                                                     </div>
                                                     <div class="face front-face" data-identifier="front-face">
                                                         <img src="./assets/front.png" alt="">
@@ -42,6 +46,22 @@ function toDealCards(){
                                                 </div>`
     }
 }
+
+/*====FUNÇÃO DE RECRIAR O DECK DE CARTAS===*/
+function newDeckOfCards(qtCards) {
+    let arrayAux = [];
+    deckOfCards.sort(shuffleCards);
+    //console.log(deckOfCards);
+    for (let i = 0; i < qtCards/2; i++) {
+        arrayAux.push(deckOfCards[i]);
+    }
+    for (let i = 0; i < qtCards/2; i++) {
+        arrayAux.push(deckOfCards[i]);
+    }
+
+    return arrayAux;    
+}
+
 
 /*====FUNÇÃO DE EMBARALHAR CARTAS===*/
 

@@ -30,7 +30,7 @@ function validateQtCards(qtCards){
 /*====FUNÇÃO DE ESPALHAR CARTAS===*/
 function toDealCards(){
     let teste = document.querySelector('main');
-    //deckOfCards.sort(shuffleCards);
+    deckOfCards.sort(shuffleCards);
     for (let i = 0; i < deckOfCards.length; i++) {
         teste.innerHTML =  teste.innerHTML +    `<div class="card" data-identifier="card">
                                                     <div class="face back-face" data-identifier="back-face">
@@ -43,4 +43,8 @@ function toDealCards(){
     }
 }
 
-''
+/*====FUNÇÃO DE EMBARALHAR CARTAS===*/
+
+function shuffleCards() {
+    return Math.random() - 0.5;    
+}

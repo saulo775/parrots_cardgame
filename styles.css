@@ -59,16 +59,16 @@ h1 {
     border: solid 1px #99CEA8;
   }
 
-  .back-face {
+  .front-face {
     transform: rotateY(180deg);
   }
 
-  .active .back-face {
-    transform: rotateY(0deg);
-  }
+.active .back-face {
+      transform: rotateY(-180deg);
+}
 
-  .active .front-face {
-    transform: rotateY(-180deg);
+.active .front-face {
+      transform: rotateY(0deg);
   }
 
 .card img {

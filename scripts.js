@@ -44,10 +44,10 @@ function toDealCards(qtCards){
 
     for (let i = 0; i < newDeck.length; i++) {
         main.innerHTML = main.innerHTML +    `<div class="card" onclick="showCard(this)" data-identifier="card">
-                                                    <div class="face back-face" data-identifier="back-face">
+                                                    <div class="face front-face" data-identifier="front-face">
                                                         <img src="./assets/${newDeck[i]}.gif" alt="">
                                                     </div>
-                                                    <div class="face front-face" data-identifier="front-face">
+                                                    <div class="face back-face" data-identifier="back-face">
                                                         <img src="./assets/front.png" alt="">
                                                     </div>
                                                 </div>`

@@ -1,4 +1,7 @@
 let qtCards = 0;
+let totalCards = 0;
+let counterCorrectCards=0;
+let counterClickCards = 0;
 
 let deckOfCards = [
     'bobrossparrot', 
@@ -10,24 +13,29 @@ let deckOfCards = [
     'unicornparrot'
 ];
 
-
 let validate = false;
-while (validate === false) {
-    qtCards = prompt("Com quantas cartas quer jogar? (numeros pares de 4 a 14");
-    validate = validateQtCards(qtCards);
+
+function askNumberCards() {
+    while (validate === false) {
+        qtCards = prompt("Com quantas cartas quer jogar? (numeros pares de 4 a 14)");
+        validate = validateQtCards(qtCards);
+    }
 }
 
 /*====FUNÇÃO DE VALIDAR NUMERO DE CARTAS===*/
+
 function validateQtCards(qtCards){
     if ((qtCards < 4) || (qtCards > 14) || (qtCards % 2 !== 0)) {
         return false;
     }else{
         toDealCards(qtCards);
+        totalCards = parseInt(qtCards);
         return true;
     }
 }
 
 /*====FUNÇÃO DE ESPALHAR CARTAS===*/
+
 function toDealCards(qtCards){
     let main = document.querySelector('main');
 
@@ -66,9 +74,11 @@ function shuffleCards() {
 
 /*====FUNÇÃO DE VIRAR CARTA===*/
 
+
 let arrayCompare = [];
 function showCard(card){
     card.classList.add('active');
+    counterClickCards++;
 
     arrayCompare.push(card);
 
@@ -79,8 +89,19 @@ function showCard(card){
             }
         }else {
             arrayCompare.length = 0
+            counterCorrectCards+=2;
         }
     }
+
+    if (counterCorrectCards === totalCards) {
+        setTimeout(resultGame, 300);
+        setTimeout(playAgain, 300);
+    }
+    
+}
+
+function resultGame() {
+    window.alert(`Você ganhou em ${counterClickCards} jogadas`)
 }
 
 function getSource(array, position) {
@@ -93,4 +114,17 @@ function removeClassActive(array){
         arrayCompare[i].classList.remove('active');
     }
     arrayCompare.length = 0;
+}
+
+function playAgain() {
+    let response = prompt("Vamos jogar novamente? (sim/não)");
+
+    if (response.toUpperCase() === "SIM") {
+        document.querySelector('main').innerHTML = ""
+        validate = false;
+        counterCorrectCards=0;
+        counterClickCards = 0;
+
+        askNumberCards();
+    }
 }

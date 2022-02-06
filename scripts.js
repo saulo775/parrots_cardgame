@@ -2,6 +2,8 @@ let qtCards = 0;
 let totalCards = 0;
 let counterCorrectCards=0;
 let counterClickCards = 0;
+let stopwatch = 0;
+let interval;
 
 let deckOfCards = [
     'bobrossparrot', 
@@ -22,19 +24,17 @@ function askNumberCards() {
     }
 }
 
-/*====FUNÇÃO DE VALIDAR NUMERO DE CARTAS===*/
-
 function validateQtCards(qtCards){
+    document.querySelector('.counter h2').innerHTML = "0"
     if ((qtCards < 4) || (qtCards > 14) || (qtCards % 2 !== 0)) {
         return false;
     }else{
         toDealCards(qtCards);
         totalCards = parseInt(qtCards);
+        interval = setInterval(activeStopwatch, 1000);
         return true;
     }
 }
-
-/*====FUNÇÃO DE ESPALHAR CARTAS===*/
 
 function toDealCards(qtCards){
     let main = document.querySelector('main');
@@ -54,7 +54,12 @@ function toDealCards(qtCards){
     }
 }
 
-/*====FUNÇÃO DE RECRIAR O DECK DE CARTAS===*/
+function activeStopwatch(){
+    let counter = document.querySelector('.counter h2');
+    stopwatch = stopwatch + 1;
+    counter.innerText = `${stopwatch}`;
+}
+
 function newDeckOfCards(qtCards) {
     let arrayAux = [];
     deckOfCards.sort(shuffleCards);
@@ -65,15 +70,9 @@ function newDeckOfCards(qtCards) {
     return arrayAux;    
 }
 
-
-/*====FUNÇÃO DE EMBARALHAR CARTAS===*/
-
 function shuffleCards() {
     return Math.random() - 0.5;    
 }
-
-/*====FUNÇÃO DE VIRAR CARTA===*/
-
 
 let arrayCompare = [];
 function showCard(card){
@@ -88,7 +87,7 @@ function showCard(card){
                setTimeout(removeClassActive, 1000, arrayCompare);
             }
         }else {
-            arrayCompare.length = 0
+            arrayCompare.length = 0;
             counterCorrectCards+=2;
         }
     }
@@ -97,17 +96,17 @@ function showCard(card){
         setTimeout(resultGame, 300);
         setTimeout(playAgain, 300);
     }
-    
 }
 
 function resultGame() {
-    window.alert(`Você ganhou em ${counterClickCards} jogadas`)
+    window.alert(`Você ganhou em ${counterClickCards} jogadas e em ${stopwatch} segundos`);
+    clearInterval(interval);
+    stopwatch = 0;
 }
 
 function getSource(array, position) {
-    return array[position].querySelector('img').getAttribute('src')
+    return array[position].querySelector('img').getAttribute('src');
 }
-
 
 function removeClassActive(array){
     for (let i = 0; i < array.length; i++) {

@@ -29,14 +29,13 @@ function validateQtCards(qtCards){
 
 /*====FUNÇÃO DE ESPALHAR CARTAS===*/
 function toDealCards(qtCards){
-    let teste = document.querySelector('main');
+    let main = document.querySelector('main');
 
     let newDeck = newDeckOfCards(qtCards);
     newDeck.sort(shuffleCards);
 
-    //console.log(newDeck);
     for (let i = 0; i < newDeck.length; i++) {
-        teste.innerHTML =  teste.innerHTML +    `<div class="card" data-identifier="card">
+        main.innerHTML = main.innerHTML +    `<div class="card" onclick="showCard(this)" data-identifier="card">
                                                     <div class="face back-face" data-identifier="back-face">
                                                         <img src="./assets/${newDeck[i]}.gif" alt="">
                                                     </div>
@@ -51,14 +50,10 @@ function toDealCards(qtCards){
 function newDeckOfCards(qtCards) {
     let arrayAux = [];
     deckOfCards.sort(shuffleCards);
-    //console.log(deckOfCards);
     for (let i = 0; i < qtCards/2; i++) {
         arrayAux.push(deckOfCards[i]);
-    }
-    for (let i = 0; i < qtCards/2; i++) {
         arrayAux.push(deckOfCards[i]);
     }
-
     return arrayAux;    
 }
 
@@ -67,4 +62,35 @@ function newDeckOfCards(qtCards) {
 
 function shuffleCards() {
     return Math.random() - 0.5;    
+}
+
+/*====FUNÇÃO DE VIRAR CARTA===*/
+
+let arrayCompare = [];
+function showCard(card){
+    card.classList.add('active');
+
+    arrayCompare.push(card);
+
+    if (arrayCompare.length === 2) {
+        if (getSource(arrayCompare, 0) !==  getSource(arrayCompare, 1)) {
+            for (let i = 0; i < arrayCompare.length; i++) {
+               setTimeout(removeClassActive, 1000, arrayCompare);
+            }
+        }else {
+            arrayCompare.length = 0
+        }
+    }
+}
+
+function getSource(array, position) {
+    return array[position].querySelector('img').getAttribute('src')
+}
+
+
+function removeClassActive(array){
+    for (let i = 0; i < array.length; i++) {
+        arrayCompare[i].classList.remove('active');
+    }
+    arrayCompare.length = 0;
 }

@@ -66,11 +66,11 @@ h1 {
     transform: rotateY(180deg);
   }
 
-  .card:hover .back-face {
+  .active .back-face {
     transform: rotateY(0deg);
   }
 
-  .card:hover .front-face {
+  .active .front-face {
     transform: rotateY(-180deg);
   }
 

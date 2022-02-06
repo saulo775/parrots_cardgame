@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     font-family: 'Roboto', sans-serif;
 }
 
@@ -33,7 +32,6 @@ h1 {
     display: flex;
     width: 90vw;
     justify-content: right;
-
     color: red;
 }
 
@@ -41,7 +39,6 @@ h1 {
     width: 117px;
     height: 146px;
     margin: 17px;
-
     position: relative;
 }
 
@@ -104,7 +101,6 @@ h1 {
 
 @media screen and (max-width: 330px) {
     main {
-        
         grid-template-columns: 1fr ;
     }
 }

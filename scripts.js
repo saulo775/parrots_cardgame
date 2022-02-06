@@ -78,7 +78,6 @@ let arrayCompare = [];
 function showCard(card){
     card.classList.add('active');
     counterClickCards++;
-
     arrayCompare.push(card);
 
     if (arrayCompare.length === 2) {
